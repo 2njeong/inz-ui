@@ -1,5 +1,4 @@
 import { Button } from '@inz-ui/ui';
-import '@inz-ui/ui/style.css';
 
 function App() {
   return (

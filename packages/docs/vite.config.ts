@@ -9,6 +9,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
+      '@inz-ui/ui': resolve(__dirname, '../ui/src/index.ts'),
     },
   },
 });

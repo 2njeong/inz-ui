@@ -1,5 +1,3 @@
-import './index.css';
-
 // Named exports for tree-shaking
 export { Button } from './components/Button';
 export type { ButtonProps } from './components/Button';
