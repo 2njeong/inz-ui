@@ -6,13 +6,12 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   children: React.ReactNode;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+const Button = ({
   variant = 'primary',
   size = 'medium',
   className = '',
   children,
-  ...props
-}) => {
+}: ButtonProps) => {
   const baseClasses =
     'inline-flex items-center justify-center gap-2 font-medium rounded-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none';
 
@@ -31,9 +30,10 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`.trim()}
-      {...props}>
+      className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`.trim()}>
       {children}
     </button>
   );
 };
+
+export default Button;
