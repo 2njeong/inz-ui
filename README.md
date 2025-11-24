@@ -29,21 +29,13 @@ pnpm install
 
 ### 개발 모드 실행
 
-모든 패키지를 개발 모드로 실행:
+문서 사이트만 실행하면 됩니다:
 
 ```bash
-pnpm dev
-```
-
-특정 패키지만 실행:
-
-```bash
-# UI 라이브러리
-pnpm --filter @inz-ui/ui dev
-
-# 문서 사이트
 pnpm --filter @inz-ui/docs dev
 ```
+
+문서 사이트가 UI 라이브러리의 소스 파일을 직접 참조하므로, UI 컴포넌트를 수정하면 즉시 반영됩니다.
 
 ### 빌드
 
@@ -140,7 +132,3 @@ import { Button } from '@/components/Button';
 - **스타일링**: Tailwind CSS 4 (@tailwindcss/vite)
 - **린팅**: ESLint
 - **포매팅**: Prettier
-
-## 라이선스
-
-MIT
