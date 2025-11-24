@@ -30,6 +30,7 @@ const AutoComplete = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState(dummyOptions);
   const [inputValue, setInputValue] = useState('');
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -41,6 +42,7 @@ const AutoComplete = () => {
     }
 
     setInputValue(value);
+    setHighlightedIndex(-1);
     setFilteredOptions(
       dummyOptions.filter((option) =>
         option.toLowerCase().split(' ').join('').includes(value.toLowerCase().split(' ').join(''))
@@ -50,6 +52,39 @@ const AutoComplete = () => {
 
   const handleOptionClick = (option: string) => {
     setInputValue(option);
+    setIsOpen(false);
+    setHighlightedIndex(-1);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!isOpen) return;
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setHighlightedIndex(Math.min(highlightedIndex + 1, filteredOptions.length - 1));
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setHighlightedIndex(Math.max(highlightedIndex - 1, 0));
+        break;
+      case 'Enter':
+        e.preventDefault();
+        if (highlightedIndex >= 0 && highlightedIndex < filteredOptions.length) {
+          handleOptionClick(filteredOptions[highlightedIndex]);
+        }
+        break;
+      case 'Escape':
+        e.preventDefault();
+        setIsOpen(false);
+        setHighlightedIndex(-1);
+        break;
+      case 'Tab':
+        // Tab은 기본 동작 유지 (포커스 이동)
+        setIsOpen(false);
+        setHighlightedIndex(-1);
+        break;
+    }
   };
 
   return (
@@ -57,15 +92,19 @@ const AutoComplete = () => {
       <AutoCompleteCompounds.Input
         value={inputValue}
         onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
         onBlur={() => setTimeout(() => setIsOpen(false), 200)}
+        placeholder="Search for an option"
       />
       {filteredOptions.length > 0 && isOpen && (
         <AutoCompleteCompounds.Dropdown>
-          {filteredOptions.map((option) => (
+          {filteredOptions.map((option, index) => (
             <AutoCompleteCompounds.Option
               key={option}
               option={highlightText(option, inputValue)}
               onClick={() => handleOptionClick(option)}
+              isHighlighted={index === highlightedIndex}
+              onMouseEnter={() => setHighlightedIndex(index)}
             />
           ))}
         </AutoCompleteCompounds.Dropdown>
