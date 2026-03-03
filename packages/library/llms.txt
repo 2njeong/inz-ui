@@ -1,0 +1,614 @@
+---
+description: inz-ui - inz-ui Design System
+alwaysApply: true
+applyTo: "**"
+version: 2.0.8
+---
+
+# inz-ui
+
+React component library for inz-ui products, built with TypeScript and Tailwind CSS 4.
+
+- Repository: https://github.com/2njeong/inz-ui
+- Registry: npm (registry.npmjs.org)
+
+## Installation
+
+Requirements: React 19.1+, Tailwind CSS 4.1+
+
+```bash
+npm install inz-ui
+```
+
+CSS configuration (in your main CSS file):
+```css
+@import "tailwindcss";
+@source "./node_modules/inz-ui/src";
+@import "inz-ui/styles";
+```
+
+> Note: `inz-ui/styles` includes reset.css (Tailwind preflight fallback), font, colors, z-index, and typography styles.
+
+## Usage
+
+```tsx
+import { StandardButton, Input, Modal } from "inz-ui";
+import { SearchIcon } from "inz-ui/icons";
+import { cn } from "inz-ui/utils/cn";
+```
+
+### Key rules
+1. All form components are controlled - `value` and `onChange` are required
+2. Use design tokens (CSS variables) instead of hardcoded colors
+3. Use `cn()` utility for conditional class merging
+4. Tree-shaking is supported
+
+---
+
+## Component Reference
+
+For detailed props and usage of each component, read the source file directly.
+
+### Buttons
+| Component | Path | Description |
+|-----------|------|-------------|
+| StandardButton | `src/components/buttons/StandardButton.tsx` | 표준 버튼 컴포넌트 |
+| DetailButton | `src/components/buttons/DetailButton.tsx` | 상세 정보 링크 스타일 버튼 컴포넌트 |
+| IconButton | `src/components/buttons/IconButton.tsx` | 아이콘 전용 버튼 컴포넌트 |
+| OptionButton | `src/components/buttons/OptionButton.tsx` | 옵션 액션 버튼 컴포넌트 |
+
+### Inputs
+| Component | Path | Description |
+|-----------|------|-------------|
+| Input | `src/components/inputs/Input.tsx` | 입력 필드 컴포넌트 |
+| SearchInput | `src/components/inputs/SearchInput.tsx` | 검색 입력 필드 컴포넌트 |
+| PasswordInput | `src/components/inputs/PasswordInput.tsx` | 비밀번호 입력 필드 컴포넌트 |
+| UnitInput | `src/components/inputs/UnitInput.tsx` | 단위 입력 필드 컴포넌트 |
+
+### Selection
+| Component | Path | Description |
+|-----------|------|-------------|
+| Dropdown | `src/components/dropdown/Dropdown.tsx` | 드롭다운 컴포넌트 |
+| DropdownSearch | `src/components/dropdown-search/DropdownSearch.tsx` | |
+| CheckBox | `src/components/check-box/CheckBox.tsx` | 체크박스 컴포넌트 |
+| Radio | `src/components/Radio/Radio.tsx` | 라디오 버튼 컴포넌트 |
+| Toggle | `src/components/toggle/Toggle.tsx` | Toggle 스위치 컴포넌트 |
+| Chip | `src/components/chip/Chip.tsx` | Chip 컴포넌트 |
+
+### Date & Time
+| Component | Path | Description |
+|-----------|------|-------------|
+| DatePicker | `src/components/date-picker/DatePicker.tsx` | 날짜 선택 컴포넌트 |
+| Calendar | `src/components/calendar/Calendar.tsx` | 캘린더 컴포넌트 |
+| NumberPicker | `src/components/number-picker/NumberPicker.tsx` | 숫자 선택 컴포넌트 |
+
+### Overlays
+| Component | Path | Description |
+|-----------|------|-------------|
+| Modal | `src/components/modal/Modal.tsx` | 모달 다이얼로그 컴포넌트 |
+| Drawer | `src/components/drawer/Drawer.tsx` | Drawer 컴포넌트 (사이드 패널) |
+| PopUp | `src/components/pop-up/PopUp.tsx` | 팝업 다이얼로그 컴포넌트 |
+| Alert | `src/components/alert/Alert.tsx` | 알림 다이얼로그 컴포넌트 |
+| Tooltip | `src/components/tooltip/Tooltip.tsx` | 툴팁 컴포넌트 |
+
+### Data Display
+| Component | Path | Description |
+|-----------|------|-------------|
+| Table | `src/components/table/Table.tsx` | 테이블 컴포넌트 |
+| Pagination | `src/components/pagination/Pagination.tsx` | 페이지네이션 컴포넌트 |
+| Badge | `src/components/badge/Badge.tsx` | 뱃지 컴포넌트 |
+| ProgressBar | `src/components/progress-bar/ProgressBar.tsx` | 진행 표시줄 컴포넌트 |
+
+### Form Helpers
+| Component | Path | Description |
+|-----------|------|-------------|
+| Label | `src/components/texts/Label.tsx` | 라벨 컴포넌트 |
+| HelpText | `src/components/texts/HelpText.tsx` | 도움말 텍스트 컴포넌트 |
+| InvalidText | `src/components/texts/InvalidText.tsx` | Error message with icon |
+| WordCounter | `src/components/texts/WordCounter.tsx` | 글자 수 카운터 컴포넌트 |
+
+### Utilities
+| Component | Path | Description |
+|-----------|------|-------------|
+| Indicator | `src/components/loading-indicator/Indicator.tsx` | 로딩 인디케이터 컴포넌트 |
+| FileUploaderCompound | `src/components/fileUpload/FileUploaderCompound.tsx` | File upload compound component |
+
+---
+
+## Component Props
+
+### Alert
+알림 다이얼로그 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| isOpen | boolean | - | Yes | 알림 표시 여부 |
+| type | "error" \| "confirm" \| "complete" | - | Yes | 알림 타입 |
+| children | ReactElement | - | No | 알림 본문에 표시할 추가 컨텐츠 |
+| confirmText | string | "확인" | No | 확인 버튼 텍스트 |
+| cancelText | string | - | No | 취소 버튼 텍스트 |
+| mainText | string | - | No | 알림의 주요 메시지 (제목) |
+| subText | string | - | No | 알림의 부가 설명 (본문) |
+| onConfirm | () => void | - | No | 확인 버튼 클릭 시 실행할 콜백 함수 |
+| onClose | () => void | - | Yes | 알림 닫기 시 실행할 콜백 함수 |
+
+### Badge
+뱃지 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| badgeLabel | string \| ReactNode | - | Yes | 뱃지에 표시될 텍스트 또는 요소 (필수) |
+| icon | ReactNode | - | No | 뱃지 앞에 표시될 아이콘 |
+| variant | "whiteSolid" \| "colorSolid" \| "colorSolidGrey" \| "text" | - | No | 뱃지 스타일: `"text"` (배경 없음) \| `"whiteSolid"` (흰색 배경) \| `"colorSolid"` (색상 배경) \| `"colorSolidGrey"` (회색 톤 색상 배경) (기본값: `"text"`) |
+| color | "grey" \| "blue" \| "purple" \| "green" \| "red" \| "yellow" | - | No | 뱃지 색상: `"grey"` \| `"blue"` \| `"purple"` \| `"green"` \| `"red"` \| `"yellow"` (기본값: `"grey"`) |
+| size | "sm" \| "md" | - | No | 뱃지 크기: `"sm"` \| `"md"` (기본값: `"md"`) |
+| className | string | - | No | 추가 CSS 클래스명 |
+
+### Calendar
+캘린더 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| mode | "single" \| "range" | "single" | No | 캘린더 모드 |
+| value | CalendarValue | - | No | 선택된 날짜 또는 날짜 범위 |
+| onValueChange | (value?: CalendarValue) => void | - | No | 날짜 선택 시 실행할 콜백 함수 |
+| dayOff | string[] | - | No | 휴일로 표시할 날짜 배열 (YYYY-MM-DD 형식) |
+| disabled | string[] | - | No | 비활성화할 날짜 배열 (YYYY-MM-DD 형식) |
+| showOutsideDays | boolean | false | No | 이전/다음 달 날짜 표시 여부 |
+| diableNextMonth | boolean | false | No | 다음 달로 이동 비활성화 여부 |
+
+### CheckBox
+체크박스 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| label | string | - | No | 체크박스 옆에 표시될 라벨 텍스트 |
+| required | boolean | false | No | 필수 표시 여부 (라벨 옆에 * 표시) |
+| id | string | - | No | 체크박스의 고유 식별자 |
+| className | string | - | No | 추가 CSS 클래스명 |
+| size | "sm" \| "md" | - | No | 체크박스 크기: `"sm"` (20px) \| `"md"` (24px) (기본값: `"md"`) |
+| checked | boolean | - | No | 체크 상태 (제어 컴포넌트) |
+| defaultChecked | boolean | - | No | 기본 체크 상태 (비제어 컴포넌트) |
+| onChange | ChangeEventHandler\<HTMLInputElement\> | - | No | 체크 상태 변경 시 실행할 콜백 함수 |
+| disabled | boolean | - | No | 비활성화 여부 |
+
+### Chip
+Chip 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| type | "select" \| "multi-select" \| "suggestion" \| "input" | - | Yes | Chip 타입: `"select"` (단일 선택) \| `"multi-select"` (다중 선택) \| `"suggestion"` (제안) \| `"input"` (입력/삭제) |
+| id | string | - | Yes | Chip의 고유 식별자 (필수) |
+| label | string | - | Yes | Chip에 표시될 텍스트 (필수) |
+| size | "sm" \| "md" | - | No | Chip 크기: `"sm"` \| `"md"` (기본값: `"md"`) |
+| disabled | boolean | - | No | 비활성화 여부 |
+| className | string | - | No | 추가 CSS 클래스명 |
+
+### DatePicker
+날짜 선택 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| labelText | string | - | No | 라벨에 표시될 텍스트 |
+| alignMode | "vertical" \| "horizontal" | - | No | 라벨 정렬 모드 |
+| ShowAsterisk | boolean | - | No | 필수 표시 여부 (라벨 옆에 * 표시) |
+| value | string | - | Yes | 선택된 날짜 값 (YYYY-MM-DD 형식) |
+| isInvalid | boolean | false | No | 유효성 검사 실패 여부 |
+| helpText | string | - | No | 도움말 텍스트 |
+| invalidText | string | - | No | 에러 메시지 텍스트 |
+| size | "sm" \| "lg" | "sm" | No | 날짜 선택 필드 크기 |
+| fitParentWidth | boolean | false | No | 툴팁 너비를 부모 요소에 맞춤 여부 |
+| children | ReactNode | - | Yes | 날짜 선택 캘린더 컴포넌트 (Calendar 컴포넌트를 전달) |
+| open | boolean | - | No | 팝오버 열림 상태 (제어 컴포넌트) |
+| onOpenChange | (open: boolean) => void | - | No | 팝오버 열림 상태 변경 시 실행할 콜백 함수 |
+
+### DetailButton
+상세 정보 링크 스타일 버튼 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| ref | Ref\<HTMLButtonElement\> | - | No | 버튼 ref |
+| children | ReactNode | - | No | 버튼 내부에 표시될 텍스트 |
+| variant | "primary" \| "secondary" | - | No | 버튼 색상: `"primary"` (주요 색상) \| `"secondary"` (회색) (기본값: `"primary"`) |
+| size | "sm" \| "md" | - | No | 버튼 크기: `"sm"` \| `"md"` (기본값: `"md"`) |
+| disabled | boolean | - | No | 버튼 비활성화 여부 |
+| onClick | MouseEventHandler\<HTMLButtonElement\> | - | No | 클릭 이벤트 핸들러 |
+| className | string | - | No | 추가 CSS 클래스명 |
+
+### Drawer
+Drawer 컴포넌트 (사이드 패널)
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| title | string \| ReactNode | - | Yes | Drawer 헤더에 표시될 제목 또는 요소 |
+| btnText | string | "완료" | Yes | 확인 버튼에 표시될 텍스트 |
+| children | ReactNode | - | Yes | Drawer 본문에 표시될 컨텐츠 |
+| size | "sm" \| "lg" | "sm" | No | Drawer 크기 |
+| isOpen | boolean | - | Yes | Drawer 표시 여부 |
+| withCancelBtn | boolean | true | No | 취소 버튼 표시 여부 |
+| onClose | () => void | - | Yes | Drawer 닫기 시 실행할 콜백 함수 |
+| onConfirm | () => void | - | Yes | 확인 버튼 클릭 시 실행할 콜백 함수 |
+| isLoading | boolean | false | No | 로딩 상태 표시 여부 |
+
+### Dropdown
+드롭다운 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| isInvalid | boolean | false | No | 유효성 검사 실패 여부 |
+| invalidText | string | - | No | 에러 메시지 텍스트 |
+| labelText | string | - | No | 라벨에 표시될 텍스트 |
+| options | DropdownOption[] | - | Yes | 드롭다운 옵션 배열 (필수) |
+| value | string | - | No | 선택된 값 |
+| onChange | (value: string) => void | - | No | 값 변경 시 실행할 콜백 함수 |
+| dropdownSize | "sm" \| "lg" | "sm" | No | 드롭다운 크기 |
+| placeholder | string | "선택하세요" | No | placeholder 텍스트 |
+| disabled | boolean | false | No | 비활성화 여부 |
+| className | string | - | No | 추가 CSS 클래스명 |
+| alignMode | "vertical" \| "horizontal" | "vertical" | No | 라벨 정렬 모드 |
+| ShowAsterisk | boolean | - | No | 필수 표시 여부 |
+| minDropdownWidth | string | - | No | 드롭다운 최소 너비 (CSS 단위) |
+
+### DropdownSearch
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| labelText | string | - | No | 라벨에 표시될 텍스트 |
+| ShowAsterisk | boolean | - | No | 필수 표시 여부 |
+| outerInputPlaceholder | string | - | No | 외부 입력 필드 placeholder |
+| innerInputPlaceholder | string | - | No | 내부 검색 입력 필드 placeholder |
+| options | Option[] | - | Yes | 드롭다운 검색 옵션 배열 (필수) |
+| displayValue | string | - | Yes | 표시될 값 (필수) |
+| onChange | (rawValue: string) => void | - | Yes | 값 변경 시 실행할 콜백 함수 (필수) |
+| error | string | - | No | 에러 메시지 (react-hook-form과 함께 사용 시) |
+| clearErrors | UseFormClearErrors\<T\> \| (() => void) | - | No | 에러 클리어 함수 (react-hook-form과 함께 사용 시) |
+| isInvalid | boolean | false | No | 유효성 검사 실패 여부 |
+| dropdownClassName | string | - | No | 드롭다운에 적용할 CSS 클래스명 |
+
+### HelpText
+도움말 텍스트 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| text | string | - | Yes | 도움말 텍스트 (필수) |
+
+### IconButton
+아이콘 전용 버튼 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| icon | ReactNode | - | Yes | 버튼에 표시할 아이콘 요소 |
+| variant | "normal" \| "outline" | - | No | 버튼 스타일: `"normal"` (24px) \| `"outline"` (32px, 테두리 포함) (기본값: `"normal"`) |
+| disabled | boolean | - | No | 버튼 비활성화 여부 |
+| onClick | MouseEventHandler\<HTMLButtonElement\> | - | No | 클릭 이벤트 핸들러 |
+| className | string | - | No | 추가 CSS 클래스명 |
+
+### Indicator
+로딩 인디케이터 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| size | number | 24 | No | 인디케이터 크기 (픽셀) |
+
+### Input
+입력 필드 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| labelText | string | - | No | 라벨에 표시될 텍스트 |
+| alignMode | "vertical" \| "horizontal" | - | No | 라벨 정렬 모드 |
+| showAsterisk | boolean | false | No | 필수 표시 여부 (라벨 옆에 * 표시) |
+| value | string | - | Yes | 입력 필드의 값 (필수) |
+| placeholder | string | - | No | placeholder 텍스트 |
+| onChange | (e: ChangeEvent\<HTMLInputElement\>) => void | - | Yes | 입력 값 변경 시 실행할 콜백 함수 (필수) |
+| isInvalid | boolean | false | No | 유효성 검사 실패 여부 |
+| helpText | string | - | No | 도움말 텍스트 (하단에 표시) |
+| invalidText | string | - | No | 에러 메시지 텍스트 (유효성 검사 실패 시 하단에 표시) |
+| successText | string | - | No | 성공 메시지 텍스트 (하단에 표시) |
+| withWordCounter | boolean | false | No | 글자 수 카운터 표시 여부 |
+| maxLength | number | - | No | 최대 입력 길이 (글자 수 카운터와 함께 사용) |
+| slot | ReactNode | - | No | 입력 필드 오른쪽에 표시할 슬롯 요소 |
+| type | "number" \| "color" \| "hidden" \| "text" \| ... | - | No | 입력 필드 타입 (기본 HTML input의 type 속성) |
+| disabled | boolean | - | No | 비활성화 여부 |
+| className | string | - | No | 추가 CSS 클래스명 |
+
+### Label
+라벨 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| labelText | string | - | No | 라벨에 표시될 텍스트 |
+| alignMode | "vertical" \| "horizontal" | "vertical" | No | 라벨 정렬 모드 |
+| showAsterisk | boolean | false | No | 필수 표시 여부 (라벨 옆에 * 표시) |
+| children | ReactNode | - | Yes | 라벨과 함께 표시될 자식 요소 (입력 필드 등) |
+| className | string | - | No | 추가 CSS 클래스명 |
+
+### Modal
+모달 다이얼로그 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| isOpen | boolean | - | Yes | 모달 표시 여부 |
+| onClose | () => void | - | Yes | 모달 닫기 시 실행할 콜백 함수 |
+| onCancel | () => void | - | No | 취소 버튼 클릭 시 실행할 콜백 함수 |
+| title | string | - | Yes | 모달 헤더에 표시될 제목 |
+| headerContent | ReactNode | - | No | 모달 헤더에 표시될 컨텐츠 |
+| children | ReactNode | - | Yes | 모달 본문에 표시될 컨텐츠 |
+| buttonText | string | - | Yes | 확인 버튼에 표시될 텍스트 |
+| footerContent | ReactNode | - | No | 취소 버튼에 표시될 텍스트 |
+| cancelText | string | - | Yes | 푸터에 표시될 컨텐츠 |
+| onConfirm | () => void | - | Yes | 확인 버튼 클릭 시 실행할 콜백 함수 |
+| isLoading | boolean | false | No | 로딩 상태 표시 여부 |
+| isConfirmDisabled | boolean | false | No | 확인 버튼 비활성화 여부 |
+
+### NumberPicker
+숫자 선택 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| value | number | - | Yes | 현재 숫자 값 (필수) |
+| onIncrement | () => void | - | Yes | 증가 버튼 클릭 시 실행할 콜백 함수 (필수) |
+| onDecrement | () => void | - | Yes | 감소 버튼 클릭 시 실행할 콜백 함수 (필수) |
+| minValue | number | - | No | 최소값 |
+| maxValue | number | - | No | 최대값 |
+| className | string | - | No | 추가 CSS 클래스명 |
+| readOnly | boolean | true | No | 입력 필드 읽기 전용 여부 |
+| required | boolean | false | No | 필수 표시 여부 (오른쪽에 * 표시) |
+
+### OptionButton
+옵션 액션 버튼 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| ref | Ref\<HTMLButtonElement\> | - | No | 버튼 ref |
+| children | ReactNode | - | No | 버튼 내부에 표시될 텍스트 또는 요소 |
+| isLoading | boolean | false | No | 로딩 상태 표시 여부 |
+| variant | "default" \| "edit" \| "cancel" \| "copy" \| "dark" | - | No | 버튼 스타일: `"default"` (주요 색상) \| `"edit"` (편집) \| `"cancel"` (취소) \| `"copy"` (복사) \| `"dark"` (어두운 배경) (기본값: `"default"`) |
+| disabled | boolean | - | No | 버튼 비활성화 여부 |
+| onClick | MouseEventHandler\<HTMLButtonElement\> | - | No | 클릭 이벤트 핸들러 |
+| className | string | - | No | 추가 CSS 클래스명 |
+
+### Pagination
+페이지네이션 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| totalCount | number | - | Yes | 전체 아이템 개수 (필수) |
+| pageSize | number | - | Yes | 한 페이지당 아이템 개수 (필수) |
+| pageButtonCount | number | 5 | No | 한 번에 표시할 페이지 버튼 개수 |
+| onPageChange | (page: number) => void | - | Yes | 페이지 변경 시 호출되는 함수 |
+
+### PasswordInput
+비밀번호 입력 필드 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| toggleShowPassword | () => void | - | Yes | 비밀번호 표시/숨김 토글 함수 (필수) |
+| type | "text" \| "password" | - | Yes | 입력 필드 타입: `"password"` (숨김) \| `"text"` (표시) |
+| labelText | string | - | No | 라벨에 표시될 텍스트 |
+| value | string | - | Yes | 입력 필드의 값 (필수) |
+| onChange | (e: ChangeEvent\<HTMLInputElement\>) => void | - | Yes | 입력 값 변경 시 실행할 콜백 함수 (필수) |
+| placeholder | string | - | No | placeholder 텍스트 |
+| isInvalid | boolean | - | No | 유효성 검사 실패 여부 |
+| helpText | string | - | No | 도움말 텍스트 |
+| invalidText | string | - | No | 에러 메시지 텍스트 |
+| showAsterisk | boolean | - | No | 필수 표시 여부 |
+| alignMode | "vertical" \| "horizontal" | - | No | 라벨 정렬 모드 |
+| withWordCounter | boolean | - | No | 글자 수 카운터 표시 여부 |
+| maxLength | number | - | No | 최대 입력 길이 |
+
+### PopUp
+팝업 다이얼로그 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| isOpen | boolean | - | Yes | 팝업 표시 여부 |
+| title | string | "title" | Yes | 팝업 헤더에 표시될 제목 |
+| text | string | "text" | Yes | 팝업 본문에 표시될 설명 텍스트 |
+| content | ReactNode | "context" | Yes | 팝업 본문에 표시될 컨텐츠 |
+| confirmText | string | "확인" | Yes | 확인 버튼에 표시될 텍스트 |
+| onClose | () => void | - | Yes | 팝업 닫기 시 실행할 콜백 함수 |
+| onConfirm | () => void | - | Yes | 확인 버튼 클릭 시 실행할 콜백 함수 |
+
+### ProgressBar
+진행 표시줄 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| value | number | - | Yes | 현재 진행 값 (필수) |
+| max | number | 100 | No | 최대 값 |
+| showPercentage | boolean | false | No | 퍼센티지 표시 여부 |
+| subText | ReactNode | - | No | 진행 바 위에 표시될 서브 텍스트 |
+
+### Radio
+라디오 버튼 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| label | string | - | No | 라디오 버튼 옆에 표시될 라벨 텍스트 |
+| required | boolean | false | No | 필수 표시 여부 (라벨 옆에 * 표시) |
+| id | string | - | No | 라디오 버튼의 고유 식별자 |
+| className | string | - | No | 추가 CSS 클래스명 |
+| size | "sm" \| "md" | - | No | 라디오 버튼 크기: `"sm"` (20px) \| `"md"` (24px) (기본값: `"md"`) |
+| name | string | - | No | 라디오 버튼 그룹 이름 (같은 name을 가진 라디오들은 그룹화됨) |
+| value | string \| number \| readonly string[] | - | No | 라디오 버튼의 값 |
+| checked | boolean | - | No | 선택 상태 (제어 컴포넌트) |
+| defaultChecked | boolean | - | No | 기본 선택 상태 (비제어 컴포넌트) |
+| onChange | ChangeEventHandler\<HTMLInputElement\> | - | No | 선택 상태 변경 시 실행할 콜백 함수 |
+| disabled | boolean | - | No | 비활성화 여부 |
+
+### SearchInput
+검색 입력 필드 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| placeholder | string | "검색어 입력" | No | placeholder 텍스트 |
+| value | string | - | Yes | 입력 필드의 값 (필수) |
+| onChange | (e: ChangeEvent\<HTMLInputElement\>) => void | - | Yes | 입력 값 변경 시 실행할 콜백 함수 (필수) |
+| onSearch | () => void | - | Yes | 검색 버튼 클릭 또는 Enter 키 입력 시 실행할 콜백 함수 (필수) |
+| onClear | () => void | - | Yes | 지우기 버튼 클릭 시 실행할 콜백 함수 (필수) |
+| className | string | - | No | 추가 CSS 클래스명 |
+| disabled | boolean | false | No | 비활성화 여부 |
+| autoFocus | boolean | false | No | 자동 포커스 여부 |
+| inputSize | "sm" \| "md" | "sm" | No | 입력 필드 크기 |
+
+### StandardButton
+표준 버튼 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| icon | ReactNode | - | No | 버튼에 표시할 아이콘 요소 |
+| iconPosition | "left" \| "right" | "left" | No | 아이콘이 표시될 위치 |
+| children | ReactNode | - | No | 버튼 내부에 표시될 텍스트 또는 요소 |
+| isLoading | boolean | false | No | 로딩 상태 표시 여부 |
+| variant | "primary" \| "secondary" \| "tertiary" \| "text" | - | No | 버튼 스타일: `"primary"` \| `"secondary"` \| `"tertiary"` \| `"text"` (기본값: `"primary"`) |
+| size | "sm" \| "md" \| "lg" | - | No | 버튼 크기: `"sm"` (40px) \| `"md"` (48px) \| `"lg"` (52px) (기본값: `"md"`) |
+| disabled | boolean | - | No | 버튼 비활성화 여부 |
+| onClick | MouseEventHandler\<HTMLButtonElement\> | - | No | 클릭 이벤트 핸들러 |
+| className | string | - | No | 추가 CSS 클래스명 |
+
+### Table
+테이블 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| columns | TableColumn\<T\>[] | - | Yes | 테이블 컬럼 정의 배열 (필수) |
+| data | T[] | - | Yes | 테이블에 표시할 데이터 배열 (필수) |
+| onRowClick | (row: T) => void | - | No | 행 클릭 시 실행할 콜백 함수 |
+| isEmptyCondition | string | - | No | 데이터가 없을 때 표시할 메시지 조건 |
+
+### Toggle
+Toggle 스위치 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| id | string | - | No | Toggle의 고유 식별자 |
+| label | string | - | No | Toggle 옆에 표시될 라벨 텍스트 |
+| labelPosition | "left" \| "right" | "left" | No | 라벨 위치 |
+| required | boolean | false | No | 필수 표시 여부 (라벨 옆에 * 표시) |
+| className | string | - | No | Toggle 스위치에 적용할 CSS 클래스명 |
+| containerClassName | string | - | No | 컨테이너에 적용할 CSS 클래스명 |
+| checked | boolean | - | No | 토글 상태 (제어 컴포넌트) |
+| defaultChecked | boolean | - | No | 기본 토글 상태 (비제어 컴포넌트) |
+| onChange | ChangeEventHandler\<HTMLInputElement\> | - | No | 토글 상태 변경 시 실행할 콜백 함수 |
+| disabled | boolean | - | No | 비활성화 여부 |
+
+### Tooltip
+툴팁 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| children | ReactNode | - | Yes | 툴팁을 표시할 대상 요소 (필수) |
+| content | string \| ReactNode | - | Yes | 툴팁에 표시될 컨텐츠 (필수) |
+| placement | "left" \| "right" \| "top" \| "bottom" | "top" | No | 툴팁 위치 |
+| icon | ReactNode | - | No | 툴팁 앞에 표시할 아이콘 |
+| maxLines | number | 2 | No | 최대 표시 줄 수 |
+| preserveNewlines | boolean | false | No | 줄바꿈 문자 보존 여부 |
+| align | "left" \| "right" \| "center" | "center" | No | 텍스트 정렬 |
+| variant | "default" \| "white" | - | No | 툴팁 스타일: `"default"` (어두운 배경) \| `"white"` (흰색 배경, 테두리) (기본값: `"default"`) |
+| className | string | - | No | 추가 CSS 클래스명 |
+
+### UnitInput
+단위 입력 필드 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| unit | string | - | Yes | 입력 필드 오른쪽에 표시될 단위 텍스트 (필수) |
+| labelText | string | - | No | 라벨에 표시될 텍스트 |
+| value | string | - | Yes | 입력 필드의 값 (필수) |
+| onChange | (e: ChangeEvent\<HTMLInputElement\>) => void | - | Yes | 입력 값 변경 시 실행할 콜백 함수 (필수) |
+| placeholder | string | - | No | placeholder 텍스트 |
+| isInvalid | boolean | - | No | 유효성 검사 실패 여부 |
+| helpText | string | - | No | 도움말 텍스트 |
+| invalidText | string | - | No | 에러 메시지 텍스트 |
+| showAsterisk | boolean | - | No | 필수 표시 여부 |
+| alignMode | "vertical" \| "horizontal" | - | No | 라벨 정렬 모드 |
+| withWordCounter | boolean | - | No | 글자 수 카운터 표시 여부 |
+| maxLength | number | - | No | 최대 입력 길이 |
+
+### WordCounter
+글자 수 카운터 컴포넌트
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| value | string | - | Yes | 현재 입력된 텍스트 값 (필수) |
+| maxLength | number | - | Yes | 최대 글자 수 (필수) |
+
+---
+
+## Icons
+
+111 SVG icons available as React components.
+
+```tsx
+import { SearchIcon, CloseIcon, CaretDownIcon } from "inz-ui/icons";
+
+<SearchIcon size={24} color="var(--color-inz-text-body)" />
+```
+
+Props: `size` (number), `color` (CSS color value)
+
+Icon source: `src/icons/`
+
+---
+
+## Design Tokens
+
+### Colors (CSS variables)
+- Primary: `--color-inz-primary-{10-95}` (blue scale, 50 is main)
+- Greyscale: `--color-inz-greyscale-{10-100}`
+- Text: `--color-inz-text-{title,body,helper,caption}`
+- Status: `--color-inz-status-{danger,warning,success,process}`
+- Background: `--color-inz-background-{admin,user,container}`
+- Line: `--color-inz-line-{border,container}`
+- Disabled: `--color-inz-disable-{fill,text}`
+
+Full color definitions: `src/styles/colors.css`
+
+### Typography
+Classes: `.heading1-3`, `.title1-3`, `.body1-4`, `.details1-3`
+
+Full typography definitions: `src/styles/typography.css`
+
+### Size conventions
+- `sm`: 40px height, body4 text
+- `md`: 48px height, body2 text
+- `lg`: 52px height
+
+---
+
+## Utilities
+
+### cn()
+Conditional class merging using clsx + tailwind-merge.
+
+```tsx
+import { cn } from "inz-ui/utils/cn";
+
+<div className={cn("base", isActive && "active")} />
+```
+
+---
+
+## Best Practices
+
+**Do:**
+- Use CSS variables for colors
+- Use `cn()` for conditional classes
+- Provide `value` + `onChange` for form components
+- Use `showAsterisk` for required fields
+
+**Don't:**
+- Use hardcoded hex colors
+- Mix with other UI libraries (MUI, Chakra, etc.)
+- Forget to import styles
+
+---
+
+## Version History
+- v2.0.8: Calendar `disablePreviousMonth` prop 추가
+- v2.0.7: reset.css added (Tailwind preflight fallback)
+- v2.0.6: Drawer & SearchInput improvements
+- v2.0.5: Pagination onPageChange prop added
+- v2.0.4: Modal footer buttons right-aligned
+- v2.0.0: Tailwind CSS v4 migration (Breaking Change)

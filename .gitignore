@@ -1,0 +1,39 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+.pnpm-store
+.cursor
+generated
+
+# Ignore .npmrc in root and apps folders (these locations may contain hardcoded tokens)
+# packages/library/.npmrc is NOT ignored (uses env variables, safe to commit)
+/.npmrc
+/apps/*/.npmrc
+.npmrc
+
+# Claude / bkit
+.claude/
+.bkit/
+docs/.bkit-memory.json
+docs/.pdca-status.json
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

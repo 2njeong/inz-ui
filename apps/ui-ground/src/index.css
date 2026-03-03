@@ -1,0 +1,7 @@
+@import "tailwindcss";
+/* tailwindcss v4는 기본적으로 JS confing의 content 값을 보지 않음 
+    source로 직접 소스 경로를 등록해야 외부 패키지 클래스를 스캔함 
+    유틸리티 클래스(basis-, bg-, text-, flex-, …)를 만들 때, 
+    어느 JS/TS/TSX 파일들을 스캔해서 className들을 찾아야 할지 아래 경로를 기준으로 함*/
+@source "../../../packages/library/src";
+@import "inz-ui/styles";

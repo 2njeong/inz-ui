@@ -1,0 +1,11 @@
+.z-dropdown {
+  z-index: 1000;
+}
+
+.z-siderbar {
+  z-index: 1000;
+}
+
+.z-tooltip {
+  z-index: 10;
+}

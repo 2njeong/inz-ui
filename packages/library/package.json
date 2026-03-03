@@ -1,0 +1,90 @@
+{
+  "name": "inz-ui",
+  "version": "2.0.8",
+  "type": "module",
+  "main": "./dist/main.cjs",
+  "module": "./dist/main.js",
+  "types": "./dist/main.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/main.js",
+      "require": "./dist/main.cjs"
+    },
+    "./components/*": {
+      "import": "./dist/components/*/[A-Z]*.js",
+      "require": "./dist/components/*/[A-Z]*.cjs",
+      "types": "./dist/components/*/*.d.ts"
+    },
+    "./icons/*": {
+      "import": "./dist/icons/*.js",
+      "require": "./dist/icons/*.cjs",
+      "types": "./dist/icons/*.d.ts"
+    },
+    "./utils/*": {
+      "import": "./dist/utils/*.js",
+      "require": "./dist/utils/*.cjs",
+      "types": "./dist/utils/*.d.ts"
+    },
+    "./styles": {
+      "types": "./dist/styles.d.ts",
+      "default": "./src/styles/styles.css"
+    },
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src",
+    "package.json",
+    "README.md",
+    "llms.txt"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/2njeong/inz-ui.git"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/react": "^19.1.15",
+    "@types/react-dom": "^19.1.9",
+    "@typescript-eslint/eslint-plugin": "^8.44.0",
+    "@typescript-eslint/parser": "^8.44.0",
+    "eslint": "^9.36.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "jsdom": "^27.0.0",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.7",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "@floating-ui/react": "^0.27.16",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-hook-form": "^7.53.2",
+    "tailwind-merge": "^3.3.1"
+  },
+  "peerDependencies": {
+    "tailwindcss": ">=4.1 <5"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ]
+}

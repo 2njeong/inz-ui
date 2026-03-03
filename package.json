@@ -1,0 +1,25 @@
+{
+  "name": "inz-ui-workspace",
+  "version": "0.0.1",
+  "description": "inz-ui 라이브러리와 프리뷰 페이지",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm --filter ui-ground dev",
+    "build": "pnpm --filter inz-ui build",
+    "test": "pnpm --filter inz-ui test",
+    "test:watch": "pnpm --filter inz-ui test:watch",
+    "lint": "pnpm --filter inz-ui lint",
+    "type-check": "pnpm --filter inz-ui type-check",
+    "extract-props": "tsx scripts/extract-props.ts"
+  },
+  "author": "inz-ui",
+  "license": "MIT",
+  "packageManager": "pnpm@10.5.2+sha512.da9dc28cd3ff40d0592188235ab25d3202add8a207afbedc682220e4a0029ffbff4562102b9e6e46b4e3f9e8bd53e6d05de48544b0c57d4b0179e22c76d1199b",
+  "devDependencies": {
+    "@types/node": "^25.2.3",
+    "baseline-browser-mapping": "^2.9.11",
+    "ts-morph": "^27.0.2",
+    "tsx": "^4.21.0"
+  }
+}

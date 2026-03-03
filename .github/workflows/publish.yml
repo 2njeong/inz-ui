@@ -1,0 +1,93 @@
+name: Publish to npm
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build package
+        run: pnpm run build
+
+      # packages/library/ 하위 파일이 변경되었을 때만 배포 로직 실행
+      - name: Check library changes
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        id: check
+        run: |
+          # 이전 커밋과 비교하여 라이브러리 파일 변경 여부 확인
+          CHANGED=$(git diff --name-only HEAD~1 HEAD | grep '^packages/library/' || true)
+          if [ -n "$CHANGED" ]; then
+            echo "library_changed=true" >> $GITHUB_OUTPUT
+            echo "라이브러리 파일 변경 감지:"
+            echo "$CHANGED"
+          else
+            echo "library_changed=false" >> $GITHUB_OUTPUT
+            echo "라이브러리 파일 변경 없음, 배포 건너뜀"
+          fi
+
+      - name: Auto bump version and publish
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.check.outputs.library_changed == 'true'
+        run: |
+          cd packages/library
+
+          # 최근 커밋 메시지 가져오기
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+
+          # 커밋 메시지에 따라 버전 업데이트
+          VERSION_BUMPED=false
+          if [[ $COMMIT_MSG == patch:* ]] || [[ $COMMIT_MSG == fix:* ]]; then
+            echo "Bumping patch version..."
+            npm version patch --no-git-tag-version
+            VERSION_BUMPED=true
+          elif [[ $COMMIT_MSG == minor:* ]] || [[ $COMMIT_MSG == feat:* ]]; then
+            echo "Bumping minor version..."
+            npm version minor --no-git-tag-version
+            VERSION_BUMPED=true
+          elif [[ $COMMIT_MSG == major:* ]] || [[ $COMMIT_MSG == *"BREAKING CHANGE"* ]]; then
+            echo "Bumping major version..."
+            npm version major --no-git-tag-version
+            VERSION_BUMPED=true
+          else
+            echo "No version bump needed (message doesn't match pattern)"
+          fi
+
+          # 버전이 변경되었으면 버전 변경 커밋 남기고 다시 푸시(푸시하지 않으면 버전 변경 커밋이 남지 않음)
+          if [ "$VERSION_BUMPED" = true ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add package.json
+            NEW_VERSION=$(node -p "require('./package.json').version")
+            # [skip ci] 내장 태그를 추가하여 버전 변경 커밋에 대한 CI 작업은 무시되도록 함
+            git commit -m "chore: bump version to ${NEW_VERSION} [skip ci]"
+
+            # Publish
+            pnpm publish --no-git-checks
+
+            # Publish 성공 후 push
+            git push
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
